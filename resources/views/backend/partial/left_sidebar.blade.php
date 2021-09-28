@@ -21,7 +21,7 @@
                     </li>
 
 
-                    <li class="dropdown"><a class="nav-link menu-title link-nav" href=""><i data-feather="home"></i><span>Dashboard</span></a>
+                    <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('admin.adminDashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="list"></i><span>Dashboard</span></a>
                         <ul class="nav-submenu menu-content">
