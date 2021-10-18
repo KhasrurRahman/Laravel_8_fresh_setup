@@ -23,3 +23,4 @@ class AdminMiddleware
         if (Auth::check() && Auth::user()->type == 'admin') { $route_name = Request::route()->getName(); $url = explode(".", $route_name)[1]; $route_type = dynamic_route::where('url', $url)->first()->ajax; $role_id = Auth::user()->role->id; $url_check = permission_role::where('role_id', $role_id)->where('url', $url)->count();if (Auth::check() && $url_check !== 0) {return $next($request);} else {if ($route_type == 1) {return response()->json(['permission' => false], 200);} else {Toastr::error('you dont have that Permission', 'Error');return redirect()->route('admin.adminDashboard');}} } else { return redirect()->route('login'); }
     }
 }
+ 

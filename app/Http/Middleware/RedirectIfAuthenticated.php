@@ -13,13 +13,23 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  ...$guards
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
+     * @param string|null ...$guards
      * @return mixed
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        if (Auth::guard('subscriber')->check()) { return $next($request); } if (Auth::guard('user')->check() && Auth::user()->type == 'admin') { return redirect('admin/adminDashboard'); } if (Auth::guard('user')->check()) { Toastr::error('you dont have that Permission', 'Permission Denied'); return $next($request); } return $next($request);
+        if (Auth::guard('user')->check()) {
+            return $next($request);
+        }
+        if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->type == 'admin') {
+            return redirect('admin/adminDashboard');
+        }
+        if (Auth::guard('admin')->check()) {
+            Toastr::error('you dont have that Permission', 'Permission Denied');
+            return $next($request);
+        }
+        return $next($request);
     }
 }

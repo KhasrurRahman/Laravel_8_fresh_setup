@@ -18,7 +18,6 @@ class dealWithPrefix
     public function handle($request, Closure $next)
     {
         $role = $request->user()->role->slag;
-
         URL::defaults([
             'roleBased' => $role
         ]);
